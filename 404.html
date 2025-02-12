@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>航哥的404</title>
+    <title>星际迷航 - 404</title>
+    <meta name="referrer-policy" content="strict-origin-when-cross-origin">
     <style>
+        /* 基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -12,165 +14,232 @@
         }
 
         body {
-            background: #0a043c;
+            background: #000;
             color: #fff;
             font-family: 'Arial', sans-serif;
-            min-height: 100vh;
+            height: 100vh;
             overflow: hidden;
             position: relative;
         }
 
+        /* 星空容器 */
+        .starfield {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 内容容器 */
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-
-        .astronaut {
-            width: 200px;
-            height: 200px;
-            position: relative;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .astronaut::before {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: #fff;
-            border-radius: 50%;
-            top: 50px;
-            left: 85px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.5);
-        }
-
-        .astronaut-body {
-            position: absolute;
-            width: 100px;
-            height: 150px;
-            background: #e0e0e0;
-            border-radius: 50px;
-            top: 70px;
-            left: 50px;
-        }
-
-        .error-code {
-            font-size: 8rem;
-            font-weight: bold;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
-            margin: 2rem 0;
-            animation: glitch 2s infinite;
-        }
-
-        .message {
-            font-size: 1.5rem;
+            height: 100vh;
             text-align: center;
-            max-width: 600px;
-            margin-bottom: 2rem;
+            padding: 20px;
         }
 
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00f7ff;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        /* 返回按钮 */
         .btn {
-            padding: 1rem 2rem;
-            background: #00b4d8;
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #0011ff, #00f7ff);
             color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
             text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border: 2px solid #00f7ff;
         }
 
         .btn:hover {
-            background: #0077b6;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,180,216,0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00f7ff;
         }
 
-        .planet {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: #2d4263;
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50%;
-            bottom: -150px;
-            right: -100px;
-            box-shadow: inset -25px -25px 40px rgba(0,0,0,0.5);
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
         }
 
-        .stars {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes glitch {
-            0% { text-shadow: 5px 4px 0px #ff00ff, -5px -4px 0px #00ffff; }
-            50% { text-shadow: -3px 2px 0px #ff00ff, 3px -2px 0px #00ffff; }
-            100% { text-shadow: 5px 4px 0px #ff00ff, -5px -4px 0px #00ffff; }
-        }
-
+        /* 星空动画 */
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1); }
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
     <div class="container">
-        <div class="astronaut">
-            <div class="astronaut-body"></div>
+        <div class="starfield" id="starfield"></div>
+        <div class="content">
+            <h1>404 - 曲速引擎故障</h1>
+            <p>我们似乎迷失在了星云中...</p>
+            <a href="/" class="btn" id="backBtn" role="button" 
+               aria-label="返回导航" tabindex="0">
+                <span class="btn-text">返回地球基地</span>
+            </a>
         </div>
-        <div class="error-code">404</div>
-        <h1 class="message">这给我干哪来了 这还是国内吗！</h1>
-        <a href="/" class="btn">返回HangChat</a>
-        <div class="planet"></div>
     </div>
 
     <script>
-        // 创建动态星星
-        function createStars() {
-            const stars = document.getElementById('stars');
-            for (let i = 0; i < 100; i++) {
+        // 星空背景生成
+        function createStarfield(containerId) {
+            const container = document.getElementById(containerId);
+            const starCount = 200;
+
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.style.position = 'absolute';
-                star.style.width = Math.random() * 3 + 'px';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
                 star.style.height = star.style.width;
-                star.style.background = '#fff';
+                star.style.backgroundColor = '#fff';
                 star.style.borderRadius = '50%';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite`;
-                stars.appendChild(star);
+                star.style.opacity = '0.3';
+                star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite`;
+                container.appendChild(star);
             }
         }
 
-        // 添加鼠标跟随特效
-        document.addEventListener('mousemove', (e) => {
-            const container = document.querySelector('.container');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            container.style.transform = `perspective(1000px) 
-                rotateX(${(y - 0.5) * 5}deg) 
-                rotateY(${(x - 0.5) * 5}deg)`;
-        });
+        // 返回逻辑控制器
+        class NavigationController {
+            constructor(btnId) {
+                this.backBtn = document.getElementById(btnId);
+                this.btnText = this.backBtn.querySelector('.btn-text');
+                this.isProcessing = false;
+                this.init();
+            }
+
+            init() {
+                this.backBtn.addEventListener('click', this.handleClick.bind(this));
+                this.backBtn.addEventListener('keydown', this.handleKeyPress.bind(this));
+            }
+
+            handleClick(e) {
+                e.preventDefault();
+                this.executeNavigation();
+            }
+
+            handleKeyPress(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.executeNavigation();
+                }
+            }
+
+            getValidReferrer() {
+                try {
+                    const referrer = document.referrer;
+                    if (!referrer) return null;
+                    
+                    const currentOrigin = location.origin;
+                    const referrerOrigin = new URL(referrer).origin;
+                    
+                    if (referrerOrigin === currentOrigin) return 'history';
+                    if (!referrer.startsWith('http')) return null;
+                    
+                    return referrer;
+                } catch {
+                    return null;
+                }
+            }
+
+            showLoading() {
+                this.btnText.innerHTML = `<span class="loading"></span>曲速启动中...`;
+                this.backBtn.style.pointerEvents = 'none';
+                this.isProcessing = true;
+            }
+
+            resetButton() {
+                this.btnText.textContent = '返回地球基地';
+                this.backBtn.style.pointerEvents = 'auto';
+                this.isProcessing = false;
+            }
+
+            executeNavigation() {
+                if (this.isProcessing) return;
+                
+                this.showLoading();
+
+                // 优先使用浏览器历史
+                if (window.history.length > 1) {
+                    window.history.back();
+                    setTimeout(() => {
+                        if (!document.hidden) {
+                            window.location.href = '/';
+                        }
+                    }, 2000);
+                    return;
+                }
+
+                // 次选referrer跳转
+                const referrer = this.getValidReferrer();
+                if (referrer && referrer !== 'history') {
+                    if (confirm(`即将前往：${new URL(referrer).hostname}\n确定继续吗？`)) {
+                        window.location.href = referrer;
+                    } else {
+                        window.location.href = '/';
+                    }
+                    return;
+                }
+
+                // 最终回退
+                window.location.href = '/';
+            }
+        }
 
         // 初始化
-        createStars();
+        document.addEventListener('DOMContentLoaded', () => {
+            // 创建星空背景
+            createStarfield('starfield');
+            
+            // 初始化返回控制器
+            new NavigationController('backBtn');
+
+            // 超时恢复机制
+            setTimeout(() => {
+                const btn = document.getElementById('backBtn');
+                if (btn.style.pointerEvents === 'none') {
+                    btn.querySelector('.btn-text').textContent = '返回地球基地';
+                    btn.style.pointerEvents = 'auto';
+                }
+            }, 5000);
+        });
     </script>
 </body>
 </html>
