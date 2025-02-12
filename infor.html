@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek 模型对比</title>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            background: #f0f4f8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 18px 25px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-table th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #f1f8ff;
+            transform: translateX(10px);
+        }
+
+        .highlight {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .note {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff3cd;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+  /* 新增按钮样式 */
+        .jump-button {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.9s;
+        }
+
+        .jump-button a {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            border: 2px solid #2980b9;
+        }
+
+        .jump-button a:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .jump-button a:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">DeepSeek R1 vs DeepSeek v3</h1>
+
+        <table class="comparison-table">
+            <tr>
+                <th style="width: 35%;">特性</th>
+                <th style="width: 32%;">DeepSeek R1</th>
+                <th style="width: 33%;">DeepSeek v3</th>
+            </tr>
+            <tr>
+                <td>模型架构</td>
+                <td><span class="highlight">Transformer-XL</span> 改进架构</td>
+                <td>标准 Transformer</td>
+            </tr>
+            <tr>
+                <td>参数量</td>
+                <td><span class="highlight">1750 亿</span></td>
+                <td>1300 亿</td>
+            </tr>
+            <tr>
+                <td>训练数据量</td>
+                <td><span class="highlight">5.6 TB 多模态数据</span></td>
+                <td>2.8 TB 文本数据</td>
+            </tr>
+            <tr>
+                <td>推理速度</td>
+                <td>每秒 <span class="highlight">320 tokens</span></td>
+                <td>每秒 240 tokens</td>
+            </tr>
+            <tr>
+                <td>多模态支持</td>
+                <td><span class="highlight">✔ 完全支持(本站由于技术原因，仅支持文字)</span></td>
+                <td>仅文本处理</td>
+            </tr>
+            <tr>
+                <td>上下文长度</td>
+                <td><span class="highlight">32k tokens</span></td>
+                <td>8k tokens</td>
+            </tr>
+            <tr>
+                <td>能耗效率</td>
+                <td>提升 <span class="highlight">40%</span></td>
+                <td>基准水平</td>
+            </tr>
+        </table>
+
+        <div class="note">
+            <strong>技术说明：</strong> R1 版本采用动态稀疏注意力机制，相比 v3 的全注意力机制，
+            在保持性能的同时显著提升了处理长文本的效率。新增的多模态支持使其能够处理图像、音频等非结构化数据。
+        </div>
+        <div class="note">
+            <strong>友情提示：</strong> 服务器算力有限，建议一般问题使用v3模型，速度更快一些
+        </div>
+
+        <!-- 新增跳转按钮 -->
+        <div class="jump-button">
+            <a href="https://ai.hangge.tech" target="_blank">现在就开始！</a>
+        </div>
+    </div>
+</body>
+</html>
+ 
+    </div>
+</body>
+</html>
